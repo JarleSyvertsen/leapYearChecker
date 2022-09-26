@@ -24,4 +24,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: Execute build & test
-        run: ./gradlew build
+        run: ./gradlew build --scan
