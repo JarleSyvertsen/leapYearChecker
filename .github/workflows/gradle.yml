@@ -8,7 +8,7 @@ jobs:
   gradle:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -23,8 +23,5 @@ jobs:
       - name: Makes gradle accessible to Github action
         run: chmod +x gradlew
 
-      - name: Execute Gradle build
+      - name: Execute build & test
         run: ./gradlew build
-
-      - name: Runs Gradle tests
-        run: ./gradlew test --tests "*"
