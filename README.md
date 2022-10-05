@@ -1,0 +1,13 @@
+# leapYearChecker
+
+#Github actions setup
+In the last exercise I've chosen to use gradle as my dependency manager, which informs the rest of my choices (in regards of making it quite easy.) Belows follows a quick summary of how I've gone about creating my .yml file.
+1. I chose the setup-actions directly in git, which creates the .github action folder, and promts the user to choose a template, or none. As I've chosen Gradle as the dependency manager, Gradle Build Action was recommended as a starting point for the .yml file. I must admit that this slightly feels like cheating, but to make effective changes to it one needs to be somewhat knowledgeable about the structure anyways, so I proceeded to use this as base.
+2. I changed the java distribution to match the one to be used in building. I do believe the tests ran without issue on 11 instead of 17 as well. However, as the base for the tests, I wanted to use the same Java version as the one on my primary computer.
+3. To enable the tests to complete at all (as all Linux/MacOS and Windows needs to complete the task without error) I first made a new step to run before build, as Linux lacks the permission to execute gradlew when it's initally launched. This was simply remedied by a chmod -x gradlew, which conveniently, MacOS and Windows disregards in this scenario, so no further modifications was needed. This meant all 3 could run buildw.
+4. I did experiment with using a gradle -test as a granular step as well, but causes the Windows instance to throw a not-found on the gradlew exectuable. As build already runs the tests, and integrates with build scan, and running the tests twice is in poor form, I decided to just leave this task to build - which ran without hiccup.
+4. I added an "on:" for push, as this is a part of the requirements.
+5. I added --scan on the build.yml, and a function to accept the Terms and Conditions (Which needs to be redone for each new instance) to get to use Gradles build scan service. This is mostly out of scope of the exercise, but I figured it's a nice function to have when I'm already integrated in the gradle system.
+6. The tests outputs in the output log, as well as the gradle build scan pages (which are better suited for checking up on these, rather than going through the logs.) This felt suboptimal, but in pratice, just running gradle-test as well leaves the user just as reliant on checking the raw logs as well. I figured build scan works as a sane way to display the final test results, as I'm not sure if there's a better way to look at these test results at a glance.
+Either way, this is with testlogging enabled, and I'm unaware of any additional functions to remedy this issue.
+And that's about it!
