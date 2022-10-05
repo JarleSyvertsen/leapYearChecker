@@ -1,6 +1,6 @@
 # leapYearChecker
 
-#Github actions setup
+## Github actions setup
 In the last exercise I've chosen to use gradle as my dependency manager, which informs the rest of my choices (in regards of making it quite easy.) Belows follows a quick summary of how I've gone about creating my .yml file.
 1. I chose the setup-actions directly in git, which creates the .github action folder, and promts the user to choose a template, or none. As I've chosen Gradle as the dependency manager, Gradle Build Action was recommended as a starting point for the .yml file. I must admit that this slightly feels like cheating, but to make effective changes to it one needs to be somewhat knowledgeable about the structure anyways, so I proceeded to use this as base.
 2. I changed the java distribution to match the one to be used in building. I do believe the tests ran without issue on 11 instead of 17 as well. However, as the base for the tests, I wanted to use the same Java version as the one on my primary computer.
